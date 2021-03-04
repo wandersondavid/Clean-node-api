@@ -1,5 +1,5 @@
 import { SignUpController } from './signup'
-import {MissingParamError} from '../errors/missing-param-error'
+import { MissingParamError } from '../errors/missing-param-error'
 describe('SignUp Controller', () => {
   test('Should returb 400 if no name is provided', () => {
     const sut = new SignUpController()
@@ -17,7 +17,7 @@ describe('SignUp Controller', () => {
 })
 
 describe('SignUp Controller', () => {
-  test('Should returb 400 if no name is provided', () => {
+  test('Should returb 400 if no email is provided', () => {
     const sut = new SignUpController()
     const httpResquet = {
       body: {
