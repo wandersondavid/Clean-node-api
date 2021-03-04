@@ -1,8 +1,8 @@
 export interface HttpResponse {
-    statusCode: number,
-    body: any
+  statusCode: number
+  body: any
 }
 
 export interface HttpResquet {
-    body?: any
+  body?: any
 }
