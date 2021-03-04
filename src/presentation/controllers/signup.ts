@@ -8,7 +8,7 @@ export class SignUpController {
 
     for (const field of requiredFields) {
       if (!httpResquet.body[field]) {
-        return badRequest(new MissingParamError('email'))
+        return badRequest(new MissingParamError(field))
       }
     }
   }
