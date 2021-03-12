@@ -47,7 +47,7 @@ const makeSut = (): SutTypes => {
 }
 
 describe('SignUp Controller', () => {
-  test('Should returb 400 if no name is provided', () => {
+  test('Should return 400 if no name is provided', () => {
     const { sut } = makeSut()
     const httpResquet = {
       body: {
@@ -61,7 +61,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('name'))
   })
 
-  test('Should returb 400 if no email is provided', () => {
+  test('Should return 400 if no email is provided', () => {
     const { sut } = makeSut()
     const httpResquet = {
       body: {
@@ -75,7 +75,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('email'))
   })
 
-  test('Should returb 400 if no password is provided', () => {
+  test('Should return 400 if no password is provided', () => {
     const { sut } = makeSut()
     const httpResquet = {
       body: {
@@ -89,7 +89,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('password'))
   })
 
-  test('Should returb 400 if no password confirmation is provided', () => {
+  test('Should return 400 if no password confirmation is provided', () => {
     const { sut } = makeSut()
     const httpResquet = {
       body: {
@@ -103,7 +103,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('passwordConfirmation'))
   })
 
-  test('Should returb 400 if an ivalid email is provided', () => {
+  test('Should return 400 if an ivalid email is provided', () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
     const httpResquet = {
@@ -134,7 +134,7 @@ describe('SignUp Controller', () => {
     expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com')
   })
 
-  test('Should returb 500 if EmailValidator throws', () => {
+  test('Should return 500 if EmailValidator throws', () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
       throw new Error()
@@ -152,7 +152,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new ServerError())
   })
 
-  test('Should returb 400 if password confirmation fails', () => {
+  test('Should return 400 if password confirmation fails', () => {
     const { sut } = makeSut()
     const httpResquet = {
       body: {
@@ -186,7 +186,7 @@ describe('SignUp Controller', () => {
     })
   })
 
-  test('Should returb 500 if AddAccount throws', () => {
+  test('Should return 500 if AddAccount throws', () => {
     const { sut, addAccountStub } = makeSut()
     jest.spyOn(addAccountStub, 'add').mockImplementationOnce(() => {
       throw new Error()
@@ -202,5 +202,25 @@ describe('SignUp Controller', () => {
     const httpResponse = sut.handle(httpResquet)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError())
+  })
+
+  test('Should return 200 if valid data is provided', () => {
+    const { sut } = makeSut()
+    const httpResquet = {
+      body: {
+        name: 'valid_name',
+        email: 'valid_email@mail.com',
+        password: 'valid_password',
+        passwordConfirmation: 'valid_password'
+      }
+    }
+    const httpResponse = sut.handle(httpResquet)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      email: 'valid_email@mail.com',
+      password: 'valid_password'
+    })
   })
 })
