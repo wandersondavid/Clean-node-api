@@ -8,7 +8,7 @@ interface SutTypes {
 
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
-    isValid (email: string): boolean {
+    isValid(email: string): boolean {
       return true
     }
   }
@@ -40,9 +40,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('name'))
   })
-})
 
-describe('SignUp Controller', () => {
   test('Should returb 400 if no email is provided', () => {
     const { sut } = makeSut()
     const httpResquet = {
@@ -56,9 +54,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('email'))
   })
-})
 
-describe('SignUp Controller', () => {
   test('Should returb 400 if no password is provided', () => {
     const { sut } = makeSut()
     const httpResquet = {
@@ -72,9 +68,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('password'))
   })
-})
 
-describe('SignUp Controller', () => {
   test('Should returb 400 if no password confirmation is provided', () => {
     const { sut } = makeSut()
     const httpResquet = {
@@ -88,9 +82,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('passwordConfirmation'))
   })
-})
 
-describe('SignUp Controller', () => {
   test('Should returb 400 if an ivalid email is provided', () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
