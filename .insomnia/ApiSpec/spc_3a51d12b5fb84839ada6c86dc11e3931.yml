@@ -1,8 +1,8 @@
 _id: spc_3a51d12b5fb84839ada6c86dc11e3931
 type: ApiSpec
 parentId: wrk_6c290291db6e4e34a58cc363b92c5ef0
-modified: 1620082537035
+modified: 1620083763053
 created: 1620082234198
 fileName: Clean-node-api.yaml
-contents: ""
+contents: test
 contentType: yaml
