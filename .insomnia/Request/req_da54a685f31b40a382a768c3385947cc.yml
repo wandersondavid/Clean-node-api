@@ -1,0 +1,32 @@
+_id: req_da54a685f31b40a382a768c3385947cc
+type: Request
+parentId: wrk_6c290291db6e4e34a58cc363b92c5ef0
+modified: 1620082702650
+created: 1620082573759
+url: http://localhost:5050/api/signup
+name: Signup
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"name": "wanderson",
+    	"email": "wandersondavid.dev@gmail.com",
+    	"password": "123",
+    	"passwordConfirmation": "123"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_465d2d07cd6446a4a45f54ac923bd238
+authentication: {}
+metaSortKey: -1620082573759
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
