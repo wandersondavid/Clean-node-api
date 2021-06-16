@@ -6,9 +6,9 @@ interface SutTypes {
   controllerStub: Controller
 }
 
-const makeController = (): Controller =>{
+const makeController = (): Controller => {
   class ControlletStub implements Controller {
-    async handle (httpRequest: HttpResquet): Promise<HttpResponse> {
+    async handle(httpRequest: HttpResquet): Promise<HttpResponse> {
       const httpResponse = {
         statusCode: 200,
         body: {
@@ -23,7 +23,7 @@ const makeController = (): Controller =>{
   return new ControlletStub()
 }
 
-const makeSut = ():SutTypes =>{
+const makeSut = (): SutTypes => {
 
   const controllerStub = makeController()
   const sut = new LogControllerDecorator(controllerStub)
@@ -33,9 +33,9 @@ const makeSut = ():SutTypes =>{
   }
 }
 
-describe('LogController Decorator', ()=> {
-  test ('Shout call controller handle ', async ()=>{
-    const {sut, controllerStub} = makeSut()
+describe('LogController Decorator', () => {
+  test('Shout call controller handle ', async () => {
+    const { sut, controllerStub } = makeSut()
     const handleSpy = jest.spyOn(controllerStub, 'handle')
 
     const httpRequest = {
@@ -48,5 +48,25 @@ describe('LogController Decorator', ()=> {
     }
     await sut.handle(httpRequest)
     expect(handleSpy).toHaveBeenCalledWith(httpRequest)
+  })
+
+  test('Shout return the same result of the controller ', async () => {
+    const { sut } = makeSut()
+
+    const httpRequest = {
+      body: {
+        email: 'any_mail@mail.com',
+        name: 'any_name',
+        password: 'any_password',
+        passwordConfirmation: 'any_password',
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual({
+      statusCode: 200,
+      body: {
+        name: 'wanderson',
+      }
+    })
   })
 })
